@@ -19,8 +19,8 @@ import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 export const url = "http://localhost:3000";
-export const user = {
-  name: Cypress.env("name", "cypress"),
-  email: Cypress.env("email", "cypress7@cypress7.com"),
+export const existingUser = {
+  name: Cypress.env("name", "gustavo"),
+  email: Cypress.env("email", "gustavo@luby.com.br"),
   password: Cypress.env("password", "123456"),
 };
