@@ -45,6 +45,14 @@ for (const command of [
   });
 }
 
+Cypress.Commands.add("signup", (name, email, password) => {
+  cy.get("#name").type(name);
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+
+  cy.get(".sc-iJKOTD").click();
+});
+
 Cypress.Commands.add("signin", (email, password) => {
   cy.get("#email").type(email);
   cy.get("#password").type(password);
