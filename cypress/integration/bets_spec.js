@@ -1,6 +1,6 @@
 import { existingUser, url } from "../support/";
 
-describe("Betting games", () => {
+describe("Betting Flow.", () => {
   const { email, password } = existingUser;
 
   beforeEach(() => {
@@ -9,13 +9,13 @@ describe("Betting games", () => {
     cy.get(".sc-cidDSM").click();
   });
 
-  it("Should change game informations.", () => {
+  it("Should change game informations when game changes.", () => {
     cy.get(".sc-jeraig>button").each((button) => {
       cy.get(button).click();
     });
   });
 
-  it("Should not allow to save bet with cart value smaller than 10.", () => {
+  it("Should not allow to save bet with cart value below 10.", () => {
     for (let index = 0; index < 3; index++) {
       cy.get(".sc-clIzBv > :nth-child(1)").click();
       cy.get(".sc-Galmp").click();
@@ -28,7 +28,7 @@ describe("Betting games", () => {
     );
   });
 
-  it("Should save bet.", () => {
+  it("Should save bet with cart value above 10.", () => {
     cy.intercept("POST", "**/bet/new-bet").as("newBet");
 
     for (let index = 0; index < 4; index++) {

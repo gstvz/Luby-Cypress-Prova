@@ -45,43 +45,52 @@ for (const command of [
   });
 }
 
-Cypress.Commands.add("signup", (name, email, password, expectedStatus, expectedMessage) => {
-  cy.intercept("POST", "**/user/create").as("register");
+Cypress.Commands.add(
+  "signup",
+  (name, email, password, expectedStatus, expectedMessage) => {
+    cy.intercept("POST", "**/user/create").as("register");
 
-  cy.get("#name").type(name);
-  cy.get("#email").type(email);
-  cy.get("#password").type(password);
+    cy.get("#name").type(name);
+    cy.get("#email").type(email);
+    cy.get("#password").type(password);
 
-  cy.get(".sc-iJKOTD").click();
+    cy.get(".sc-iJKOTD").click();
 
-  cy.wait("@register").then((xhr) => {
-    expect(xhr.response.statusCode).be.eq(expectedStatus);
-  });
+    cy.wait("@register").then((xhr) => {
+      expect(xhr.response.statusCode).be.eq(expectedStatus);
+    });
 
-  cy.contains(expectedMessage).should('be.visible');
-});
+    cy.contains(expectedMessage).should("be.visible");
+  }
+);
 
-Cypress.Commands.add("signin", (email, password, expectedStatus, expectedMessage) => {
-  cy.intercept("POST", "**/login").as("login");
+Cypress.Commands.add(
+  "signin",
+  (email, password, expectedStatus, expectedMessage) => {
+    cy.intercept("POST", "**/login").as("login");
 
-  cy.get("#email").type(email);
-  cy.get("#password").type(password);
+    cy.get("#email").type(email);
+    cy.get("#password").type(password);
 
-  cy.get(".sc-iJKOTD").click();
+    cy.get(".sc-iJKOTD").click();
 
-  cy.wait("@login").then((xhr) => {
-    expect(xhr.response.statusCode).be.eq(expectedStatus);
-  });
-  cy.contains(expectedMessage).should('be.visible');
-});
+    cy.wait("@login").then((xhr) => {
+      expect(xhr.response.statusCode).be.eq(expectedStatus);
+    });
+    cy.contains(expectedMessage).should("be.visible");
+  }
+);
 
-Cypress.Commands.add("resetPassword", (email, expectedStatus, expectedMessage) => {
-  cy.intercept("POST", "**/reset").as("reset");
-  cy.get('.sc-bBHxTw').type(email);
+Cypress.Commands.add(
+  "resetPassword",
+  (email, expectedStatus, expectedMessage) => {
+    cy.intercept("POST", "**/reset").as("reset");
+    cy.get(".sc-bBHxTw").type(email);
 
-  cy.get('.sc-iJKOTD').click();
-  cy.wait("@reset").then((xhr) => {
-    expect(xhr.response.statusCode).be.eq(expectedStatus);
-  });
-  cy.contains(expectedMessage).should('be.visible');
-});
+    cy.get(".sc-iJKOTD").click();
+    cy.wait("@reset").then((xhr) => {
+      expect(xhr.response.statusCode).be.eq(expectedStatus);
+    });
+    cy.contains(expectedMessage).should("be.visible");
+  }
+);

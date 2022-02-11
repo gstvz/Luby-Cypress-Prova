@@ -1,6 +1,6 @@
 import { existingUser, url } from "../support/";
 
-describe("User Account Update", () => {
+describe("User Account Update Flow.", () => {
   const { name, email, password } = existingUser;
   beforeEach(() => {
     cy.visit(url);

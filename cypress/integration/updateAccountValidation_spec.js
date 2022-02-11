@@ -1,6 +1,6 @@
 import { existingUser, url } from "../support/";
 
-describe("User Account Update Validations", () => {
+describe("User Account Update Validations Flow.", () => {
   const { email, password } = existingUser;
   beforeEach(() => {
     cy.visit(url);
@@ -8,7 +8,7 @@ describe("User Account Update Validations", () => {
     cy.get(":nth-child(1) > .sc-crHmcD").click();
   });
 
-  it.skip("Should not allow empty fields.", () => {
+  it("Should not allow empty fields.", () => {
     cy.get(".sc-iJKOTD").click();
     cy.get('[for="name"] > .sc-cxpSdN')
       .contains("Required field.")
@@ -18,7 +18,7 @@ describe("User Account Update Validations", () => {
       .should("be.visible");
   });
 
-  it.skip("Should receive only letters, acentuation and spaces on name.", () => {
+  it("Should receive only letters, acentuation and spaces on name.", () => {
     cy.get("#name").type("1#%_456");
     cy.get(".sc-iJKOTD").click();
     cy.contains("Must contain only letters, acentuation and spaces.").should(

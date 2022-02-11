@@ -1,6 +1,6 @@
 import { url } from "../support";
 
-describe("User Sign Up Fields Validation", () => {
+describe("User Sign Up Validations Flow.", () => {
   beforeEach(() => {
     cy.visit(`${url}/auth/register`);
   });
