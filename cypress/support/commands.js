@@ -61,11 +61,18 @@ Cypress.Commands.add("signup", (name, email, password, expectedStatus, expectedM
   cy.contains(expectedMessage).should('be.visible');
 });
 
-Cypress.Commands.add("signin", (email, password) => {
+Cypress.Commands.add("signin", (email, password, expectedStatus, expectedMessage) => {
+  cy.intercept("POST", "**/login").as("login");
+
   cy.get("#email").type(email);
   cy.get("#password").type(password);
 
   cy.get(".sc-iJKOTD").click();
+
+  cy.wait("@login").then((xhr) => {
+    expect(xhr.response.statusCode).be.eq(expectedStatus);
+  });
+  cy.contains(expectedMessage).should('be.visible');
 });
 
 Cypress.Commands.add("resetPassword", (email, expectedStatus, expectedMessage) => {
