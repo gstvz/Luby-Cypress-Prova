@@ -45,12 +45,20 @@ for (const command of [
   });
 }
 
-Cypress.Commands.add("signup", (name, email, password) => {
+Cypress.Commands.add("signup", (name, email, password, expectedStatus, expectedMessage) => {
+  cy.intercept("POST", "**/user/create").as("register");
+
   cy.get("#name").type(name);
   cy.get("#email").type(email);
   cy.get("#password").type(password);
 
   cy.get(".sc-iJKOTD").click();
+
+  cy.wait("@register").then((xhr) => {
+    expect(xhr.response.statusCode).be.eq(expectedStatus);
+  });
+
+  cy.contains(expectedMessage).should('be.visible');
 });
 
 Cypress.Commands.add("signin", (email, password) => {
