@@ -59,3 +59,14 @@ Cypress.Commands.add("signin", (email, password) => {
 
   cy.get(".sc-iJKOTD").click();
 });
+
+Cypress.Commands.add("resetPassword", (email, expectedStatus, expectedMessage) => {
+  cy.intercept("POST", "**/reset").as("reset");
+  cy.get('.sc-bBHxTw').type(email);
+
+  cy.get('.sc-iJKOTD').click();
+  cy.wait("@reset").then((xhr) => {
+    expect(xhr.response.statusCode).be.eq(expectedStatus);
+  });
+  cy.contains(expectedMessage).should('be.visible');
+});
