@@ -1,4 +1,4 @@
-import { existingUser, url } from "../support/";
+import { existingUser, url } from "../support";
 
 describe("Games filtering", () => {
   const { email, password } = existingUser;
